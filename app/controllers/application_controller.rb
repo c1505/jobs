@@ -55,4 +55,10 @@ class ApplicationController < Sinatra::Base
     @jobs = Job.all 
     erb :"/jobs/index"
   end
+
+  get '/jobs/new' do
+    erb :"/jobs/new"
+  end
+
+  
 end
