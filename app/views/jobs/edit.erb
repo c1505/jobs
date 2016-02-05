@@ -1,0 +1,20 @@
+<h1>Edit Job</h1>
+<form method="post" action="/jobs/<%=@job.id%>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <p>Title: <input type="text" name="title"></p>
+  <p>Company: <input type="text" name="company"></p>
+  <p>Location: <input type="text" name="location"></p>
+  <p>Salary: <input type="text" name="salary"></p>
+
+  <p>body: <input type="text" name="body"></p>
+  <p>contacts: <input type="text" name="contacts"></p>
+  <p>company_info: <input type="text" name="company_info"></p>
+
+
+
+
+
+
+  <input type="submit" value="Update Job">
+</form>

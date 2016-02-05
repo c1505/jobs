@@ -60,5 +60,27 @@ class ApplicationController < Sinatra::Base
     erb :"/jobs/new"
   end
 
+  post '/jobs' do 
+    @job = Job.new(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
+    @job.save
+    erb :"/jobs/index"
+  end
+
+  get '/jobs/:id' do
+    @job = Job.find(params[:id])
+    erb :"/jobs/show"
+  end
+
+  get '/jobs/:id/edit' do 
+    @job = Job.find(params[:id])
+    erb :"/jobs/edit"
+  end
+
+  patch '/jobs/:id' do 
+    @job = Job.find(params[:id])
+    @job.update(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
+    erb :"/jobs/show"
+  end
+
   
 end
