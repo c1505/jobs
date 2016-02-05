@@ -1,0 +1,13 @@
+<h1>Edit User</h1>
+<h1>Signup</h1>
+<form method="post" action="/users/<%=@user.id%>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+
+  <p>Name: <input type="text" name="name" value="<%= @user.name%>"></p>
+  <p>Username: <input type="text" name="username" value="<%= @user.username%>"></p>
+  <p>Email Address: <input type="text" name="email" value="<%= @user.email%>"></p>
+  <!-- <p>Password: <input type="text" name="password"></p> -->
+
+  <input type="submit" value="Save Changes">
+</form>
+
