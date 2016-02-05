@@ -41,6 +41,23 @@ class ApplicationController < Sinatra::Base
     #is there a point in a conditional to see if logged in and who the current user is?
   end
 
+  delete '/users/:id/delete' do #admin function also
+    if logged_in?
+      user = current_user
+      if user.id == params[:id]
+        user.destroy
+        redirect '/'
+      else
+        session.clear
+        redirect '/users/login'
+        #this should probably just be an error.  trying to destroy a user when they are not logged in as user
+        #could clear session and then redirect to login
+      end
+    else
+      redirect '/users/login'
+    end
+  end
+
   post '/users' do 
     @user = User.new(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
     @user.save
@@ -48,9 +65,13 @@ class ApplicationController < Sinatra::Base
     erb :"/users/show"
   end
 
-  get '/users/:id' do 
-    @user = User.find(params[:id])
-    erb :"/users/show"
+  get '/users/:id' do
+    if logged_in?
+      @user = current_user
+      erb :"/users/show"
+    else
+      redirect '/users/login'
+    end
   end
 
   get '/users' do    #usefull to have to look at them, but will likely delete later

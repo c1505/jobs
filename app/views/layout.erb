@@ -1,0 +1,8 @@
+<h2><%= "Current User: #{current_user.username}" if logged_in? %></h2>
+<p>  <% if logged_in? %></p>
+  <%= "<p><a href='/users/logout'>Logout</a></p>" %>
+  <% else %>
+  <%= "<p><a href='/users/login'>Login</a></p>" %>
+<% end %>
+<p><a href='/jobs'>View Jobs</a></p>
+<%= yield %>
