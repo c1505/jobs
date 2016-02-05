@@ -4,4 +4,11 @@
   <p><%= job.location %></p>
   <p><%= job.company %></p>
   <p><%= job.salary %></p>
+   <p><a href="/jobs/<%= job.id %>">Show</a></p>
+   <p><a href="/jobs/<%= job.id %>/edit">edit</a></p>
+   
+   <form method="post" action="/jobs/<%=job.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete">
+  </form>
 <% end %>

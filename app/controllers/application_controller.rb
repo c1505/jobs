@@ -10,12 +10,35 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do 
-    "Hello World"
     "login link here"
   end
 
   get '/users/signup' do 
     erb :"/users/new"
+  end
+  
+  get '/users/login' do
+    if logged_in?
+      redirect "/users/#{current_user.id}"
+    else
+      erb :"/users/login"
+    end
+  end
+  
+  post '/users/login' do
+    user = User.find_by(username: params[:username])
+    if user.authenticate(params[:password])
+      session[:id] = user.id
+      redirect "/users/#{user.id}"
+    else
+      redirect "/users/login"
+    end
+  end
+  
+  get '/users/logout' do
+    session.clear
+    redirect '/'
+    #is there a point in a conditional to see if logged in and who the current user is?
   end
 
   post '/users' do 
@@ -47,9 +70,7 @@ class ApplicationController < Sinatra::Base
     redirect "/users/#{user.id}"
   end
 
-  get '/users/login' do 
-    erb :"/users/login"
-  end
+
 
   get '/jobs' do
     @jobs = Job.all 
@@ -80,6 +101,22 @@ class ApplicationController < Sinatra::Base
     @job = Job.find(params[:id])
     @job.update(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
     erb :"/jobs/show"
+  end
+  
+  delete '/jobs/:id/delete' do 
+    Job.find(params[:id]).destroy
+    redirect '/jobs'
+    #success or failure of destroy message
+  end
+  
+  helpers do 
+    def current_user
+      User.find(session[:id])
+    end
+    
+    def logged_in?
+      !!session[:id]
+    end
   end
 
   

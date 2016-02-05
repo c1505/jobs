@@ -8,3 +8,9 @@
 <p>Technical to learn: <%= @job.learn_technical %></p>
 <p>Build to interview: <%= @job.build %></p>
 <p>Next Step: <%= @job.next_step %></p>
+<p><a href="/jobs/<%= @job.id %>/edit">Edit</a></p>
+
+<form method="post" action="/jobs/<%=@job.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Job Listing">
+</form>
