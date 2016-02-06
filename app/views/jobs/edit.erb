@@ -2,14 +2,14 @@
 <form method="post" action="/jobs/<%=@job.id%>">
   <input id="hidden" type="hidden" name="_method" value="patch">
 
-  <p>Title: <input type="text" name="title" value="<%= @job.title%>"></p>
-  <p>Company: <input type="text" name="company" value="<%= @job.company%>" ></p>
-  <p>Location: <input type="text" name="location" value="<%= @job.location%>"></p>
-  <p>Salary: <input type="text" name="salary" value= "<%=@job.salary%>"></p>
+  <p>Title: <input type="text" name="job[title]" value="<%= @job.title%>"></p>
+  <p>Company: <input type="text" name="job[company]" value="<%= @job.company%>" ></p>
+  <p>Location: <input type="text" name="job[location]" value="<%= @job.location%>"></p>
+  <p>Salary: <input type="text" name="job[salary]" value= "<%=@job.salary%>"></p>
 
-  <p>body: <input type="text" name="body" value="<%= @job.body%>"></p>
-  <p>contacts: <input type="text" name="contacts"  value="<%= @job.contacts%>"></p>
-  <p>company_info: <input type="text" name="company_info"  value="<%= @job.company_info%>"></p>
+  <p>body: <input type="text" name="job[body" value="<%= @job.body%>"></p>
+  <p>contacts: <input type="text" name="job[contacts]"  value="<%= @job.contacts%>"></p>
+  <p>company_info: <input type="text" name="job[company_info]"  value="<%= @job.company_info%>"></p>
 
 
   <!--add the rest in here-->

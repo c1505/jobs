@@ -120,7 +120,7 @@ class ApplicationController < Sinatra::Base
   post '/jobs' do
     if logged_in?
       user = current_user
-      user.jobs.build(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info]) 
+      user.jobs.build(params)
       user.save
       redirect '/jobs'
     else
@@ -151,7 +151,7 @@ class ApplicationController < Sinatra::Base
   patch '/jobs/:id' do
     @job = Job.find(params[:id])
     if logged_in? && current_user.id == @job.user_id 
-      @job.update(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
+      @job.update(params[:job])
       erb :"/jobs/show"
     else
       redirct '/users/login'
