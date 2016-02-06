@@ -1,6 +1,10 @@
 <h2><%= "Current User: #{current_user.username}" if logged_in? %></h2>
+<h2><%= "Current User: #{current_user.id}" if logged_in? %></h2>
+
+
 <p>  <% if logged_in? %></p>
   <%= "<p><a href='/users/logout'>Logout</a></p>" %>
+  <%= "<p><a href='/jobs/new'>Record New Job</a></p>" %>
   <% else %>
   <%= "<p><a href='/users/login'>Login</a></p>" %>
 <% end %>

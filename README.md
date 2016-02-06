@@ -1,2 +1,2 @@
 # jobs
-track information related to jobs you are interested in
+Sinatra application to keep track of information related to jobs you are interested in

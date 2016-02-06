@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do 
-    "login link here"
+    erb :index
   end
 
   get '/users/signup' do 
@@ -27,9 +27,9 @@ class ApplicationController < Sinatra::Base
   
   post '/users/login' do
     user = User.find_by(username: params[:username])
-    if user.authenticate(params[:password])
+    if user && user.authenticate(params[:password])
       session[:id] = user.id
-      redirect "/users/#{user.id}"
+      redirect "/jobs"
     else
       redirect "/users/login"
     end
@@ -74,15 +74,24 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  ###needs to go away in "production"
   get '/users' do    #usefull to have to look at them, but will likely delete later
-    @users = User.all
-    erb :"/users/index"
+    if logged_in?
+      @users = User.all
+      erb :"/users/index"
+    else
+      redirect '/users/login'
+    end
   end
   #suppose this could be an admin view
 
-  get '/users/:id/edit' do 
-    @user = User.find(params[:id])
-    erb :"/users/edit"
+  get '/users/:id/edit' do
+    if logged_in?
+      @user = User.find(session[:id])
+      erb :"/users/edit"
+    else
+      redirect '/users/login'
+    end
   end
 
   patch '/users/:id' do #flash mesage for changes saved or not
@@ -91,42 +100,74 @@ class ApplicationController < Sinatra::Base
     redirect "/users/#{user.id}"
   end
 
-
-
   get '/jobs' do
-    @jobs = Job.all 
-    erb :"/jobs/index"
+    if logged_in?
+      @jobs = User.find(current_user.id).jobs
+      erb :"/jobs/index"
+    else
+      redirect '/users/login'
+    end
   end
 
   get '/jobs/new' do
-    erb :"/jobs/new"
+    if logged_in?
+      erb :"/jobs/new"
+    else
+      redirect '/users/login'
+    end
   end
 
-  post '/jobs' do 
-    @job = Job.new(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
-    @job.save
-    erb :"/jobs/index"
+  post '/jobs' do
+    if logged_in?
+      user = current_user
+      user.jobs.build(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info]) 
+      user.save
+      redirect '/jobs'
+    else
+      redirect '/users/login'
+    end
   end
 
   get '/jobs/:id' do
-    @job = Job.find(params[:id])
-    erb :"/jobs/show"
+    if logged_in?
+      @jobs = User.find(current_user.id).jobs
+      @job = @jobs.find(params[:id])
+      erb :"/jobs/show"
+    else
+      redirect '/users/login'
+    end
   end
 
-  get '/jobs/:id/edit' do 
-    @job = Job.find(params[:id])
-    erb :"/jobs/edit"
+  get '/jobs/:id/edit' do
+    if logged_in?
+      @jobs = User.find(current_user.id).jobs
+      @job = @jobs.find(params[:id])
+      erb :"/jobs/edit"
+    else
+      redirect '/users/login'
+    end
   end
 
-  patch '/jobs/:id' do 
+  patch '/jobs/:id' do
     @job = Job.find(params[:id])
-    @job.update(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
-    erb :"/jobs/show"
+    if logged_in? && current_user.id == @job.user_id 
+      @job.update(title: params[:title], company: params[:company],location: params[:location],salary: params[:salary],body: params[:body],contacts: params[:contacts],company_info: params[:company_info])
+      erb :"/jobs/show"
+    else
+      redirct '/users/login'
+    end
   end
   
-  delete '/jobs/:id/delete' do 
-    Job.find(params[:id]).destroy
-    redirect '/jobs'
+  delete '/jobs/:id/delete' do
+    job = Job.find(params[:id])
+    if logged_in? && current_user.id == job.user_id
+      job.destroy
+      redirect '/jobs'
+      #success message
+    else
+      redirect '/users/login'
+    end
+    #failure message
     #success or failure of destroy message
   end
   
