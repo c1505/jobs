@@ -87,7 +87,15 @@
     <script src="/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    
+    <% if flash[:success] %>
+      <div class="alert alert-<%= 'success'%>"><%=flash[:success] %></div>
+    <% end %>
 
+    <% if flash[:danger] %>
+      <div class="alert alert-danger"><%=flash[:danger] %></div>
+    <% end %>
+    
     <%= yield %>
 
   </body>

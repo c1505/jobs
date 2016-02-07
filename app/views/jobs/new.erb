@@ -1,16 +1,16 @@
 <h1>Add Job</h1>
-<form method="post" action="/jobs">
+<form method="post" action="/jobs" id="jobform">
 
   <p>Title: <input type="text" name="title"></p>
   <p>Company: <input type="text" name="company"></p>
   <p>Location: <input type="text" name="location"></p>
   <p>Salary: <input type="text" name="salary"></p>
 
-  <p>body: <input type="text" name="body"></p>
   <p>contacts: <input type="text" name="contacts"></p>
-  <p>company_info: <input type="text" name="company_info"></p>
+  <p>company_info: <input class="form-control"type="text" name="company_info"></p>
+  <p>Body:</p><textarea class="form-control" rows="7" form="jobform" name="body"></textarea>
 
-
+<!-- maybe add formcontrol to other parts later, will probably want everything to be in a grid format first -->
 
 
 

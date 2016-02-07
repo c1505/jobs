@@ -1,5 +1,5 @@
 <h1>Edit Job</h1>
-<form method="post" action="/jobs/<%=@job.id%>">
+<form id="job_form_edit" method="post" action="/jobs/<%=@job.id%>">
   <input id="hidden" type="hidden" name="_method" value="patch">
 
   <p>Title: <input type="text" name="job[title]" value="<%= @job.title%>"></p>
@@ -7,9 +7,9 @@
   <p>Location: <input type="text" name="job[location]" value="<%= @job.location%>"></p>
   <p>Salary: <input type="text" name="job[salary]" value= "<%=@job.salary%>"></p>
 
-  <p>body: <input type="text" name="job[body" value="<%= @job.body%>"></p>
   <p>contacts: <input type="text" name="job[contacts]"  value="<%= @job.contacts%>"></p>
   <p>company_info: <input type="text" name="job[company_info]"  value="<%= @job.company_info%>"></p>
+  <p>Body:</p><textarea class="form-control" rows="7" form="job_form_edit" name="job[body]"  ><%= @job.body%></textarea>
 
 
   <!--add the rest in here-->
