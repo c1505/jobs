@@ -37,7 +37,7 @@ class ApplicationController < Sinatra::Base
   
   get '/users/logout' do
     session.clear
-    erb :index, locals: {message: "Logged Out"}
+    erb :index
     #is there a point in a conditional to see if logged in and who the current user is?
   end
 
