@@ -65,11 +65,8 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/users' do 
-    unless params[:username].empty?
-      @user = User.new(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
-      @user.save
-    end
-    if @user && @user.save 
+    @user = User.new(name: params[:name], username: params[:username], email: params[:email], password: params[:password])
+    if @user.save 
       session[:id] = @user.id
       flash[:success] = "Welcome #{@user.name}!"
       redirect "/users/#{@user.id}"
@@ -77,9 +74,6 @@ class ApplicationController < Sinatra::Base
       flash[:danger] = "Account must have a username and password.  Please try again."
       redirect '/users/signup'
     end
-
-    
-    # erb :"/users/show"
   end
 
   get '/users/:id' do
@@ -135,9 +129,13 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       user = current_user
       user.jobs.build(params)
-      user.save
-      flash[:success] = "Recorded New Job"
-      redirect '/jobs'
+      if user.save
+        flash[:success] = "Recorded New Job"
+        redirect '/jobs'
+      else
+        flash[:danger] = "Title, Company, and Location are required to record a new job"
+        redirect '/jobs/new'
+      end
     else
       flash[:danger] = "Please Login Before Recording a Job"
       redirect '/users/login'
