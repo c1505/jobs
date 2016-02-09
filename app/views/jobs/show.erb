@@ -1,16 +1,37 @@
-<p>Company: <%= @job.company %></p>
-<p>Job Title: <%= @job.title %></p>
-<p>Location: <%= @job.location %></p>
-<p>Salary: <%= @job.salary %></p>
-<p>Post Body: <%= @job.body %></p>
-<p>Contacts: <%= @job.contacts %></p>
-<p>Company Information: <%= @job.company_info %></p>
-<p>Technical to learn: <%= @job.learn_technical %></p>
-<p>Build to interview: <%= @job.build %></p>
-<p>Next Step: <%= @job.next_step %></p>
-<p><a href="/jobs/<%= @job.id %>/edit">Edit</a></p>
+<p><strong>Company:</strong> <%= @job.company %></p>
+<p><strong>Job Title: </strong><%= @job.title %></p>
+<p><strong>Location: </strong><%= @job.location %></p>
+<p><strong>Salary: </strong><%= @job.salary %></p>
+<p><strong>Contacts: </strong><%= @job.contacts %></p>
+<p><strong>Company Information: </strong><%= @job.company_info %></p>
+<p><strong>Technical to learn: </strong><%= @job.learn_technical %></p>
+<p><strong>Things to Build: </strong><%= @job.build %></p>
+<p><strong>Next Step: </strong> <%= @job.next_step %></p>
+
+<div class="row">
+<div class="col-md-1">
+  <p>
+    Interested?<br>
+    <input type="radio" name="job[interested]" value="true" <%="checked" if @job.interested %> > Yes<br>
+    <input type="radio" name="job[interested]" value="false" <%="checked" unless @job.interested %> > No<br>
+  </p>
+</div>
+
+<div class="col-md-1">
+  <p>
+    Contacted?<br>
+    <input type="radio" name="job[contacted]" value="true" <%="checked" if @job.contacted %> > Yes<br>
+    <input type="radio" name="job[contacted]" value="false"<%="checked" unless @job.contacted %> > No<br>
+  </p>
+</div>
+</div>
+
+<p>Interview Date : <%= @job.interview_date %></p>
+<p><strong>Post Body: </strong><%= @job.body %></p>
+
+<a class="btn btn-primary" href="/jobs/<%= @job.id %>/edit" role="button">Edit</a>
 
 <form method="post" action="/jobs/<%=@job.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Job Listing">
+    <input class="btn btn-danger" type="submit" value="Delete Job Listing">
 </form>

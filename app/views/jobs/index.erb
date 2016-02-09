@@ -4,15 +4,18 @@
   <%= message %>
 <% end %>
 <% @jobs.each do |job| %>
-  <h2><%= job.title %></h2>
+  <h3><%= job.title %></h3>
   <p><%= job.location %></p>
   <p><%= job.company %></p>
   <p><%= job.salary %></p>
-   <p><a href="/jobs/<%= job.id %>">Show</a></p>
-   <p><a href="/jobs/<%= job.id %>/edit">edit</a></p>
+   <p><a class="btn btn-info" href="/jobs/<%= job.id %>" role="button">Show</a></p>
+
+   <p><a class="btn btn-primary" href="/jobs/<%= job.id %>/edit" role="button">Edit</a></p>
+
+
    
    <form method="post" action="/jobs/<%=job.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete">
+    <input class="btn btn-danger" type="submit" value="Delete">
   </form>
 <% end %>

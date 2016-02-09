@@ -8,11 +8,11 @@
   <p>Email Address: <input type="text" name="email" value="<%= @user.email%>"></p>
   <!-- <p>Password: <input type="text" name="password"></p> -->
 
-  <input type="submit" value="Save Changes">
+  <input class="btn btn-primary" type="submit" value="Save Changes">
 </form>
 
  <form method="post" action="/users/<%=@user.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete Account">
+  <input class="btn btn-danger" type="submit" value="Delete Account">
 </form>
 
