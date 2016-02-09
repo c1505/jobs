@@ -9,6 +9,31 @@
   <p>contacts: <input type="text" name="job[contacts]"  value="<%= @job.contacts%>"></p>
   <p>company_info: <input type="text" name="job[company_info]"  value="<%= @job.company_info%>"></p>
 
+
+  <p>Things to Build: <input type="text" name="job[build]" value=" <%= @job.build   %>" ></p>
+  <p>Next Step: <input type="text" name="job[next_step]" value=" <%= @job.next_step   %>" ></p>
+
+  <p>Interview Date: <input type="date" name="job[interview_date]" value=" <%= @job.interview_date   %>" ></p>
+  <p>Technical Things to Learn: <input type="text" name="job[learn_technical]" value=" <%= @job.learn_technical   %>" ></p>
+
+    <div class="row">
+    <div class="col-md-1">
+      <p>
+        Interested?<br>
+        <input type="radio" name="job[interested]" value="true" <%="checked" if @job.interested %> > Yes<br>
+        <input type="radio" name="job[interested]" value="false" <%="checked" unless @job.interested %> > No<br>
+      </p>
+    </div>
+
+    <div class="col-md-1">
+      <p>
+        Contacted?<br>
+        <input type="radio" name="job[contacted]" value="true" <%="checked" if @job.contacted %> > Yes<br>
+        <input type="radio" name="job[contacted]" value="false"<%="checked" unless @job.contacted %> > No<br>
+      </p>
+    </div>
+  </div>
+
  <!--add the rest in here-->
 <!--     t.text     "learn_technical"
     t.text     "build"
