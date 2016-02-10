@@ -46,10 +46,12 @@ GEM
     minitest (5.8.4)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    pg (0.18.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (2.16.0)
     rack (1.6.4)
     rack-flash3 (1.0.5)
       rack
@@ -115,7 +117,9 @@ DEPENDENCIES
   bcrypt
   capybara
   database_cleaner!
+  pg
   pry
+  puma
   rack-flash3
   rack-test
   rake
@@ -127,6 +131,3 @@ DEPENDENCIES
   sqlite3
   thin
   tux
-
-BUNDLED WITH
-   1.11.2

@@ -8,7 +8,6 @@ gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'rake'
 gem 'require_all'
 
-gem 'sqlite3'
 
 gem 'thin'
 gem 'shotgun'
@@ -20,6 +19,10 @@ gem 'rack-flash3'
 group :production do 
   gem 'pg'
   gem 'puma'
+end
+
+group :development do 
+  gem 'sqlite3'
 end
 
 group :test do
