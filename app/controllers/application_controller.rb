@@ -190,6 +190,10 @@ class ApplicationController < Sinatra::Base
     #failure message
     #success or failure of destroy message
   end
+
+  get '/raptorize' do 
+    erb :raptorize
+  end
   
   helpers do 
     def current_user

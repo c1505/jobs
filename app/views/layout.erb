@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Jobs</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -56,13 +56,16 @@
                   <%= "<a href='/users/#{current_user.id}'>"%><%="Current User: #{current_user.username} #{current_user.id}"%></a>
                 <% end %>
             </li>
-            <li>
+
+            
                 <% if logged_in? %>
-                  <%= "<a href='/users/logout'>Logout</a>" %>
+                  <li><%= "<a href='/users/logout'>Logout</a>" %></li>
                   <% else %>
-                  <%= "<a href='/users/login'>Login</a>" %>
+                  <li><%= "<a href='/users/login'>Login</a>" %></li>
+                  <li><%= "<a href='/users/signup'>Signup</a>" %></li>
                 <% end %>
-            </li>
+            
+            <li><a href="/raptorize">Raptorize!</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
