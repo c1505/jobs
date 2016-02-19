@@ -21,7 +21,7 @@
       <p>
         Interested?<br>
         <input type="radio" name="job[interested]" value="true" <%="checked" if @job.interested %> > Yes<br>
-        <input type="radio" name="job[interested]" value="false" <%="checked" unless @job.interested %> > No<br>
+        <input type="radio" name="job[interested]" value="false" <%="checked" if @job.interested == false%> > No<br>
       </p>
     </div>
 
